@@ -2,7 +2,7 @@ import os
 import json
 from bson import ObjectId
 from flask import Flask, request, jsonify
-from db import DB
+from src.db import DB
 
 DB.init()
 app = Flask(__name__)
