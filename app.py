@@ -17,7 +17,7 @@ class JSONEncoder(json.JSONEncoder):
 
 @app.route('/')
 def index():
-    return f'Hello world'
+    return f'<h1>Hello world</h1>'
 
 # Student
 @app.route('/student/addStudent', methods=['POST'])
@@ -25,7 +25,7 @@ def addStudent():
     data = request.json
     DB.insertInto("Student", data)
     print("add data success")
-    return data
+    return jsonify(data)
 
 
 @app.route('/student/login', methods=['GET'])
@@ -34,7 +34,7 @@ def login():
     cur = DB.listCol(
         "Student", {"_id": data['_id'], "password": data['password']})
     print("login success")
-    return cur[0]
+    return jsonify(cur[0])
 
 # Subject
 @app.route('/subject/addSubject', methods=['POST'])
@@ -42,7 +42,7 @@ def addSubject():
     data = request.json
     DB.insertInto("Subject", data)
     print(f'add subject success')
-    return data
+    return jsonify(data)
 
 
 @app.route('/subject/addStudentToSubject', methods=['POST'])
@@ -59,7 +59,7 @@ def getTimeSubject():
     sub = DB.listCol("Subject", {"_id": data['sub_id']})[0]
     for j in sub['learn']:
         if j['sec'] == data['sec']:
-            return j
+            return jsonify(j)
     return 'not sec'
 
 
@@ -72,4 +72,5 @@ def addTeacher():
     return data
 
 
-app.run()
+if __name__ == "__main__":
+    app.run(threaded=True, port=5000)
