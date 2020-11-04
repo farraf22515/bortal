@@ -142,7 +142,6 @@ pipenv==2020.11.4
 pkginfo==1.5.0.1
 pluggy==0.12.0
 ply==3.11
-post==2019.4.13
 prometheus-client==0.7.1
 prompt-toolkit==2.0.9
 protobuf==3.9.1
@@ -173,7 +172,6 @@ pytest-remotedata==0.3.1
 pythainlp==2.0.6
 python-dateutil==2.8.0
 python-dotenv==0.10.3
-pytz==2019.1
 PyWavelets==1.0.3
 pywin32==223
 pywinpty==0.5.5
@@ -182,8 +180,6 @@ pyzmq==18.0.0
 QtAwesome==0.5.7
 qtconsole==4.5.1
 QtPy==1.8.0
-query-string==2019.4.13
-request==2019.4.13
 requests==2.22.0
 rope==0.14.0
 ruamel-yaml==0.15.46
