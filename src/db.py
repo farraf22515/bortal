@@ -8,6 +8,7 @@ class DB:
     def init():
         client = pymongo.MongoClient(DB.URI)
         DB.DATABASE = client["SW-project"]
+        print("Database success")
 
     @staticmethod
     def insertInto(collection, data):
@@ -20,3 +21,7 @@ class DB:
     @staticmethod
     def listCol(collection, query):
         return DB.DATABASE[collection].find(query)
+
+    @staticmethod
+    def updateCol(collection, where, query):
+        DB.DATABASE[collection].update(where, query)
