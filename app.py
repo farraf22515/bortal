@@ -1,11 +1,13 @@
 import os
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from src.db import DB
 
 DB.init()
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -137,8 +139,8 @@ def professorStudentToCoiurse():
     data = request.json
     try:
         stu = DB.listCol('Student', {'_id': data['stud_id']})[0]
-        course = DB.list('Course', {'_id': data['course_id']})
-        # if(len())
+        course_cur = DB.list('Course', {'_id': data['course_id']})
+        course = [i for i in course_cur]
     except:
         return "error to add student to course"
 
