@@ -40,8 +40,11 @@ for i in range(50):
     for i in range(c_sec):
         time1 = random.randint(1, 7)
         time2 = random.randint(8, 13)
+        time2s = str(time2)
+        if(time2 < 10):
+            time2s = "0" + str(time2)
         time3 = time2 + 3
-        time = str(time1) + str(time2) + "00" + str(time3) + "00"
+        time = str(time1) + time2s + "00" + str(time3) + "00"
         classroom = str(random.randint(200, 217))
         k = {
             'sec': i+1,

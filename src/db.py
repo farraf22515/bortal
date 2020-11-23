@@ -1,8 +1,16 @@
 import pymongo
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+ID = os.environ.get("ID")
+PASSWORD = os.environ.get("PASSWORD")
 
 
 class DB:
-    URI = "mongodb+srv://farraf22505:far22505@cluster0.4hy63.mongodb.net/SW-project?retryWrites=true&w=majority"
+    URI = f'mongodb+srv://{ID}:{PASSWORD}@cluster0.4hy63.mongodb.net/SW-project?retryWrites=true&w=majority'
 
     @staticmethod
     def init():

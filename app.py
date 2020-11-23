@@ -1,8 +1,8 @@
 import os
 import json
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 from src.db import DB
 
 DB.init()
@@ -44,7 +44,14 @@ def studentLogin():
         return "error"
 
 
+@app.route('/student/studentSendToTeacher', methods=['POST'])
+def studentSendToTeacher():
+    data = request.json
+
+    return 0
 # ANCHOR course
+
+
 @app.route('/course/all', methods=['GET'])
 def courseAll():
     cur = DB.listAllCol("Course")
