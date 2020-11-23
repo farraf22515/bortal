@@ -1,5 +1,7 @@
 import os
 import json
+from bson import ObjectId
+import datetime
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -44,11 +46,40 @@ def studentLogin():
         return "error"
 
 
-@app.route('/student/studentSendToTeacher', methods=['POST'])
-def studentSendToTeacher():
+@app.route('/student/studentSendRequestCourseToTeacher', methods=['POST'])
+def studentSendRequestCourseToTeacher():
     data = request.json
+    dat = {
+        "stud_id": data['stud_id'],
+        "detail": "add student to course",
+        "course_id": data['course_id'],
+        "course_sec": data['course_sec'],
+        "time_stamp": datetime.datetime.now()
+    }
+    prof = DB.listCol("Professor", {"_id": data['prof_id']})[0]
+    ann = prof['prof_anouncement']
+    ann.append(dat)
+    try:
+        DB.updateCol("Professor", {"_id": data['prof_id']},
+                     {"$set": {"prof_anouncement": ann}})
+        return "success"
+    except:
+        return "error to update "
 
-    return 0
+
+@app.route('/student/bypassSchedule', methods=['POST'])
+def studentBypassSchdule():
+    data = request.json
+    dat = {
+        'stud_id': data['stud_id'],
+        'data': data['course']
+    }
+    DB.insertInto("Schedule", dat)
+    dat['_id'] = str(dat['_id'])
+    print(dat)
+    return jsonify(dat)
+
+
 # ANCHOR course
 
 
@@ -152,7 +183,7 @@ def professorStudentToCoiurse():
         return "error to add student to course"
 
 
-# Schudule Mother Fucker
+# ANCHOR Schudule Mother Fucker
 
 
 @app.route('/schudule/', methods=['POST'])
@@ -163,6 +194,17 @@ def displaySchedule():
         cur = DB.listCol("Schudule", {"_id": data['stud_id']})
     except:
         return "error"
+
+
+# ANCHOR admin
+
+
+@app.route('/admin/addTeacherToCourse', methods=['POST'])
+def adminAddTeacherToCorse():
+    data = request.json
+    course = DB.listCol("Course", {"_id": data['course_id']})[0]
+
+    return 0
 
 
 if __name__ == "__main__":
