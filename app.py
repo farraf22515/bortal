@@ -80,6 +80,13 @@ def studentBypassSchdule():
     return jsonify(dat)
 
 
+@app.route('/student/announcment', methods=['GET'])
+def studentViewAnnouncement():
+    data = request.json
+    course = data['course_id']
+    cur = DB.listCol("Announcement", {'ann_course': course})
+    return jsonify(cur[0])
+
 # ANCHOR course
 
 

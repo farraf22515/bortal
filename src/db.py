@@ -3,10 +3,10 @@ import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-ID = os.environ.get("ID")
-PASSWORD = os.environ.get("PASSWORD")
+# dotenv_path = join(dirname(__file__), '.env')
+# load_dotenv(dotenv_path)
+ID = os.environ["ID"]
+PASSWORD = os.environ["PASSWORD"]
 
 
 class DB:
